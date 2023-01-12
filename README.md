@@ -19,3 +19,16 @@ Task1 - Write a function that removes the three largest elements from an integer
 Task2 - Write a function that takes 4 lists of numbers and outputs the number of unique ones.
 
 Task3 - Write a function that takes two lists of positive numbers and outputs the largest ordinary number, or zero if the total number is not found.
+
+
+===== ch06_strings =====
+
+Read chapter 6 - Strings of The Quick Python Book
+Covered topics:
+■ Understanding strings as sequences of characters
+■ Using basic string operations
+■ Inserting special characters and escape sequences
+■ Converting from objects to strings
+■ Formatting strings
+■ Using the byte type
+note: reading formatting sections is optional
