@@ -5,8 +5,17 @@ Some assignments have been lost.
 The internship process was based on the book "The Quick Python Book - 3 edition". Below are links to the book and other sources.
 
 
-ch04_basics - The mission itself is lost.
+====== ch04_basics =====
+
+The mission itself is lost.
 
 
-ch05_collections - Read chapter 5 of the "The Quick Python Book - 3 edition".
+=====ch05_collections =====
+
+Read chapter 5 of the "The Quick Python Book - 3 edition".
+
 Task1 - Write a function that removes the three largest elements from an integer list (list size >= 3) and returns a list of the results. If the largest element is not unique at some step, remove the one closest to the end of the list. The original list should not change.
+
+Task2 - Write a function that takes 4 lists of numbers and outputs the number of unique ones.
+
+Task3 - Write a function that takes two lists of positive numbers and outputs the largest ordinary number, or zero if the total number is not found.
