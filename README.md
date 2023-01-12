@@ -32,3 +32,5 @@ Covered topics:
 ■ Formatting strings
 ■ Using the byte type
 note: reading formatting sections is optional
+
+The mission itself is lost.
