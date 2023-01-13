@@ -20,3 +20,11 @@ def unborded_string(s):
 
 
 print(unborded_string(borded_string('Armando')))
+
+
+# Task4
+def normalize_name(s):
+    return ' '.join(s.title().split())
+
+
+print(normalize_name('сэр Артур Конан Дойл'))
