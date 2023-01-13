@@ -12,3 +12,11 @@ def borded_string(s):
 
 
 print(borded_string('Armando'))
+
+
+# Task3
+def unborded_string(s):
+    return s.split('\n')[1][1: -1]
+
+
+print(unborded_string(borded_string('Armando')))
