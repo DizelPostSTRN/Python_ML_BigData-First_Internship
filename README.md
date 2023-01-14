@@ -46,4 +46,21 @@ Covered topics:
 ■ Using dictionaries as caches
 note: reading 7.5 Sparse matrices and further sections is optional
 
+Task1 - Write a function that creates swapped dictionary (keys and values interchanged) for given dictionary.
+In original dictionary multiple keys may refer to the same value, so, new value should be tuple with all corresponding keys.
+Example: dictionary {1:2, 3:4, 5:4, 7:2, 9:4} swapped to {2: (1, 7), 4: (3, 9, 5)}
+Hint: use 'for' loop like in book's section 7.3
+Function signature: def swap_dict(d)
+Your solution should contain Python code of the program.
+You have to deliver Eclipse project contains your solution to Git repository for review.
+Ask your tutor if you have any questions.
+
+Task2 - Write a function that creates compact version of dictionary.
+In compact dictionary keys are grouped by original dict's values into tuples.
+Example: dictionary {1:2, 3:4, 5:4, 7:2, 9:4} compacted to {(3, 9, 5): 4, (1, 7): 2}
+Hint: use 'for' loop like in book's section 7.3
+Function signature: def compact_dict(d)
+Your solution should contain Python code of the program.
+You have to deliver Eclipse project contains your solution to Git repository for review.
+Ask your tutor if you have any questions.
 
