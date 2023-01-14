@@ -34,3 +34,16 @@ Covered topics:
 note: reading formatting sections is optional
 
 The mission itself is lost.
+
+
+===== ch07_dictionaries =====
+
+Read chapter 7 - Dictionaries of The Quick Python Book
+Covered topics:
+■ Defining a dictionary
+■ Using dictionary operations
+■ Determining what can be used as a key
+■ Using dictionaries as caches
+note: reading 7.5 Sparse matrices and further sections is optional
+
+
