@@ -64,3 +64,15 @@ Your solution should contain Python code of the program.
 You have to deliver Eclipse project contains your solution to Git repository for review.
 Ask your tutor if you have any questions.
 
+
+===== ch08_control_flow =====
+
+Read chapter 8 - Control flow of The Quick Python Book
+Covered topics:
+■ Repeating code with a while loop
+■ Making decisions: the if-elif-else statement
+■ Iterating over a list with a for loop
+■ Using list and dictionary comprehensions
+■ Delimiting statements and blocks with
+indentation
+■ Evaluating Boolean values and expressions
