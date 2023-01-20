@@ -105,3 +105,17 @@ Your solution should contain Python code of the program.
 You have to deliver Eclipse project contains your solution to Git repository for review.
 Ask your tutor if you have any questions.
 
+
+===== ch09_functions =====
+
+Read chapter 9 - Functions of The Quick Python Book
+Covered topics:
+■ Defining functions
+■ Using function parameters
+■ Passing mutable objects as parameters
+■ Understanding local and global variables
+■ Creating and using lambda expressions
+■ Using decorators
+
+
+
