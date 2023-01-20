@@ -117,5 +117,28 @@ Covered topics:
 ■ Creating and using lambda expressions
 ■ Using decorators
 
+Task1 - Write a simple function which will transform a list of temperature values in Fahrenheit to a list of temperature values in Celsius. Use .map() function and lambda expression in this task.
+
+Function signature: def to_celsius(temperature_list)
+
+Your solution should contain Python code of the program.
+You have to deliver Eclipse project contains your solution to Git repository for review.
+Ask your tutor if you have any questions.
+
+Task2 - Write a simple program to make a chain of function decorators for html text formatting (bold, italic, underline).
+
+It should works like this:
+
+@bold
+@italic
+@underline 
+def get_text(): 
+    return "hello world" 
+
+print(get_text()) ## shows "<b><i><u>hello world</u></i></b>" 
+
+Your solution should contain Python code of the program.
+You have to deliver Eclipse project contains your solution to Git repository for review.
+Ask your tutor if you have any questions.
 
 
