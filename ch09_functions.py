@@ -65,3 +65,30 @@ print(golden_ratio(0))
 print(golden_ratio(1))
 print(golden_ratio(2))
 print(golden_ratio(100))
+
+
+# Task4
+def gen_stream(total, sorted_iterable, extractor=lambda x: x):
+    elem_iter = map(extractor, sorted_iterable)
+    pos, val = next(elem_iter, (None, None))
+    a = 0
+    while total is None or a < total:
+        if a == pos:
+            yield val
+            pos, val = next(elem_iter, (None, None))
+        else:
+            yield 0
+        a += 1
+
+
+precipitation_days = [(3, 1, 4), (5, 2, 6)]
+
+
+def day_extractor(x):
+    months = [31, 28, 31, 30, 31, 31, 30, 31, 30, 31, 30, 31]
+    acc = sum(months[:x[1] - 1]) + x[0] - 1
+    return acc, x[2]
+
+
+gen1 = gen_stream(9, [(4, 111), (7, 12)])
+print(list(gen1), '\n')
