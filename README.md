@@ -105,3 +105,111 @@ Your solution should contain Python code of the program.
 You have to deliver Eclipse project contains your solution to Git repository for review.
 Ask your tutor if you have any questions.
 
+
+===== ch09_functions =====
+
+Read chapter 9 - Functions of The Quick Python Book
+Covered topics:
+■ Defining functions
+■ Using function parameters
+■ Passing mutable objects as parameters
+■ Understanding local and global variables
+■ Creating and using lambda expressions
+■ Using decorators
+
+Task1 - Write a simple function which will transform a list of temperature values in Fahrenheit to a list of temperature values in Celsius. Use .map() function and lambda expression in this task.
+
+Function signature: def to_celsius(temperature_list)
+
+Your solution should contain Python code of the program.
+You have to deliver Eclipse project contains your solution to Git repository for review.
+Ask your tutor if you have any questions.
+
+Task2 - Write a simple program to make a chain of function decorators for html text formatting (bold, italic, underline).
+
+It should works like this:
+
+@bold
+@italic
+@underline 
+def get_text(): 
+    return "hello world" 
+
+print(get_text()) ## shows "<b><i><u>hello world</u></i></b>" 
+
+Your solution should contain Python code of the program.
+You have to deliver Eclipse project contains your solution to Git repository for review.
+Ask your tutor if you have any questions.
+
+Task3 - 1) For given function (with one parameter, parameter type and return value type are equal) generate another function that applies original fuction multiple times.
+
+Example:
+
+from math import sin
+f1 = fn(lambda x: "sin(%s)" % x, 5)
+f2 = fn(lambda x: sin(x), 5)
+print("%s = %f" % (f1("1"), f2(1)))
+
+>>sin(sin(sin(sin(sin(1))))) = 0.587181
+
+print("%s = %f" % (f1("2"), f2(2)))
+
+>>sin(sin(sin(sin(sin(2))))) = 0.606464
+
+print(fn(lambda x: sin(x), 0)(1000))
+
+>> 1000
+
+Function signature: def fn(f, n)
+
+2) Using 'fn' (see first part of the task) generate function that calculates golden ratio approximation.
+Continued fraction theory (for curious):
+https://ru.wikipedia.org/wiki/Непрерывная_дробь#.D0.A1.D0.B2.D0.BE.D0.B9.D1.81.D1.82.D0.B2.D0.B0_.D0.B8_.D0.BF.D1.80.D0.B8.D0.BC.D0.B5.D1.80.D1.8B
+https://en.wikipedia.org/wiki/Continued_fraction
+final formula:
+1 + 1 / (1 + 1 / (1 + 1 / (...)))
+
+some results:
+golden_ratio(0) = 1
+golden_ratio(1) = 2
+golden_ratio(2) = 1.5
+golden_ratio(100) = 1.6180...
+
+Function signature: def golden_ratio(n), where 'n' is number of invocations (and number of terms in continued fraction)
+Рабочая ссылка
+https://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F_%D0%B4%D1%80%D0%BE%D0%B1%D1%8C#.D0.A1.D0.B2.D0.BE.D0.B9.D1.81.D1.82.D0.B2.D0.B0_.D0.B8_.D0.BF.D1.80.D0.B8.D0.BC.D0.B5.D1.80.D1.8B
+
+
+Task4 - Write a function that produces stream generator for given iterable object (list, generator, etc) whose elements contain position and value and sorted by order of apperance. Stream generator should be equal to initial stream (without position) but gaps filled with zeroes. For example:
+>>> gen = gen_stream(9,[(4,111),(7,12)])
+>>> list(gen) [0, 0, 0, 0, 111, 0, 0, 12, 0] # first element has zero index, so 111 located on fifth position, 12 located on 8th position
+I.e. 2 significant elements has indexes 4 and 7, all other elements filled with zeroes.
+To simplify things elements are sorted (i.e element with lower position should precede element with higher number) in initial stream.
+
+First parameter can be None, in this case stream should be inifinite, e.g. infinite zeroes stream:
+>>> gen_stream(None, [])
+following stream starts with 0, 0, 0, 0, 111, 0, 0, 12, ... then infinitely generates zeroes:
+>>> gen_stream(None, [(4,111),(7,12)])
+
+Function should also support custom position-value extractor for more advanced cases, e.g.
+
+def day_extractor(x):
+  months = [31,28,31,30,31,31,30,31,30,31,30,31]
+  acc = sum(months[:x[1]-1]) + x[0] - 1
+  return (acc, x[2])
+
+>>> precipitation_days = [(3,1,4),(5,2,6)]
+>>> list(gen_stream(59,precipitation_days,day_extractor)) #59: January and February to limit output
+[0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+precipitation_days format is following: (d,m,mm), where d - day in month, m - month, mm - precipitation in millimeters
+So, in example:
+(3,1,4) - January,3 precipitation: 4 mm
+(5,2,6) - February,5 precipitation: 6 mm
+Extractor passed as optional third parameter with default value - lambda function that handles (position, value) pairs like in first example.
+
+Implementation hint:
+you may need folowing built-in functions to iterate over input iterable object:
+iter (https://docs.python.org/3/library/functions.html#iter), next (https://docs.python.org/3/library/functions.html#next)
+
+Function signature: def gen_stream (total, sorted_iterable, extractor)
+
