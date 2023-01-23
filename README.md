@@ -213,3 +213,6 @@ iter (https://docs.python.org/3/library/functions.html#iter), next (https://docs
 
 Function signature: def gen_stream (total, sorted_iterable, extractor)
 
+
+===== ch14_exceptions =====
+
