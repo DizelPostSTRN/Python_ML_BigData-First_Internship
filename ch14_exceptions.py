@@ -19,7 +19,7 @@ def retrieve_age(person):
             raise PersonTooOld(f"The age of person is {age}. Person too old")
         if age > 122:
             raise PersonNotAlive(f"The age of person is {age}. Today there are no people of this age")
-    except (ValueError, KeyError, PersonTooOld, PersonNotAlive) as e:
+    except (ValueError, KeyError, AgeNotInRange) as e:
         print(f"{e.__class__.__name__}: {e}")
 
 
