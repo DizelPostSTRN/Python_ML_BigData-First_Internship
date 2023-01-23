@@ -216,3 +216,9 @@ Function signature: def gen_stream (total, sorted_iterable, extractor)
 
 ===== ch14_exceptions =====
 
+You have the following function:
+def retrieve_age(person):
+  return int(person["age"])
+
+
+Modify this function to handle possible exceptions.
