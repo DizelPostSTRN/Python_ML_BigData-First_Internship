@@ -1,31 +1,26 @@
 class AgeNotInRange(Exception):
-    def __init__(self, message):
-        super().__init__(message)
+    pass
 
 
 class PersonTooOld(AgeNotInRange):
-    def __init__(self, age):
-        super().__init__(message=f"The age of person is {age}. Person too old")
+    pass
 
 
 class PersonNotAlive(AgeNotInRange):
-    def __init__(self, age):
-        super().__init__(message=f"The age of person is {age}. Today there are no people of this age")
+    pass
 
 
 def retrieve_age(person):
     try:
         age = int(person["age"])
-    except ValueError:
-        return ValueError("Value not int")
-    except KeyError:
-        return KeyError("Key of dict not age")
-    if 0 < age < 100:
-        return age
-    elif 100 < age < 123:
-        return PersonTooOld(age)
-    elif age > 122:
-        return PersonNotAlive(age)
+        if 0 < age < 100:
+            return age
+        if 100 < age < 123:
+            raise PersonTooOld(f"The age of person is {age}. Person too old")
+        if age > 122:
+            raise PersonNotAlive(f"The age of person is {age}. Today there are no people of this age")
+    except:
+        return None
 
 
 print(retrieve_age({"age": 45}))
