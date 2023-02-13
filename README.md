@@ -264,22 +264,37 @@ $03 – UTF-8 encoded Unicode, in ID3v2.4.
 To convert to string use `decode` function, e.g. in REPL:
 >>> b'\xd0\x9f\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82, Python 3!'.decode('UTF-8')
 'Привет, Python 3!'
+
 Implementaion notes:
+
 •	this is educational task, don't implement all features described in specification, just what required in task
+
 •	ensure your file starts with ID3 tag
+
 •	ensure ID3v2's version is 3 or 4
+
 •	don't parse files with extended header
+
 •	realworld ID3 tags can be incorrectly constructed, be careful (use Python 'with' construct to open file, exceptions should be handled)
+
 •	if it's not possible to parse file (for any reason: file not exists, no file read access, bad format, etc) return empty list
+
 •	read only tag data from file, don't read it all, this decreases IO dramatically (2.5 VS 27 seconds on my 1.6 GB directory with MP3s)
+
 •	it's ok to use "magic numbers" while parsing structures, e.g. version (major) occupies byte 4 in ID3 header, so can be accessed in following way: tag_header3 (compare with tag_header_offset = 3; tag_header[tag_header_offset])
+
 •	you may use hex editor to investigate file content
+
 •	see attached doc for more details
+
+---------------------------------------
+
 Your function should return list of tuples (in order of appearance) with tag data, tuple format:
 •	Frame ID
 •	size
 •	binary data
 •	for text fields data converted to string, otherwise None
+
 Examples:
  >>> parse_id3v2('ariya_ulitsa_roz.mp3')
 [(b'TIT2', 19, b'\x03\xd0\xa3\xd0\xbb\xd0\xb8\xd1\x86\xd0\xb0 \xd1\x80\xd0\xbe\xd0\xb7\x00', 'Улица роз\x00'), (b'TALB', 29, b'\x03\xd0\x93\xd0\xb5\xd1\x80\xd0\xbe\xd0\xb9 \xd0\xb0\xd1\x81\xd1\x84\xd0\xb0\xd0\xbb\xd1\x8c\xd1\x82\xd0\xb0\x00', 'Герой асфальта\x00'), (b'TCON', 13, b'\x03Heavy Metal\x00', 'Heavy Metal\x00'), (b'TDRC', 6, b'\x001987\x00', '1987\x00'), (b'TRCK', 5, b'\x005/6\x00', '5/6\x00'), (b'TPE1', 10, b'\x03\xd0\x90\xd1\x80\xd0\xb8\xd1\x8f\x00', 'Ария\x00')]
