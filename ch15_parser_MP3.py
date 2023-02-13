@@ -6,8 +6,7 @@ class VersionError(Exception):
     pass
 
 
-def parse_id3v2(filename: str = "") -> list:
-    filename = fr"{filename}"
+def parse_id3v2(filename) -> list:
     encodings = {
         0: 'ISO-8859-1',
         1: 'UTF-16',
@@ -17,7 +16,7 @@ def parse_id3v2(filename: str = "") -> list:
     result = []  # Список, в который будут записаны кортежи с данными
     try:
         with open(filename, "rb") as file:
-            id3_data = file.read()
+            id3_data = file.read(10)
             file_id = id3_data[:3]  # Получаем идентификатор файла (ID3)
             if file_id != b'ID3':
                 raise NotMP3Error(f"File {filename} not MP3")  # Если файл не начинается с идентификатора ID3
@@ -27,23 +26,21 @@ def parse_id3v2(filename: str = "") -> list:
             id3_s_bytes = id3_data[6:10]  # Размер данных в байтовой записи
             # Переводим в int
             id3_size = (id3_s_bytes[0] << 21) + (id3_s_bytes[1] << 14) + (id3_s_bytes[2] << 7) + id3_s_bytes[3]
-            # id3_data = file.read(id3_size)  # Информация о кадрах
-            id3_data = id3_data[10:10 + id3_size]
-            while id3_data:
-                frame_id = id3_data[:4]  # Идентификатор кадра
+            while file.tell() < 10 + id3_size:
+                frame = file.read(10)
+                frame_id = frame[:4]  # Идентификатор кадра
                 if frame_id == b'\x00\x00\x00\x00':  # Если идентификатора нет пропускаем итерацию
                     break
                 if id3_ver == 3:  # Размер данных для версии 3
-                    frame_size = int.from_bytes(id3_data[4:8], 'big')
+                    frame_size = int.from_bytes(frame[4:8], 'big')
                 elif id3_ver == 4:  # Размер данных для версии 4
-                    frame_s_b = id3_data[4:8]
+                    frame_s_b = frame[4:8]
                     frame_size = (frame_s_b[0] << 21) + (frame_s_b[1] << 14) + (frame_s_b[2] << 7) + frame_s_b[3]
-                frame_data = id3_data[10:10 + frame_size]  # Данные кадра
+                frame_data = file.read(frame_size)  # Данные кадра
                 frame_text_data = None
                 if chr(frame_id[0]) == 'T':  # Если идентификатор начинается с T, пытаемся преобразовать в текст
                     if frame_data[0] in encodings.keys():
                         frame_text_data = frame_data[1:].decode(encodings[frame_data[0]])
-                id3_data = id3_data[10 + frame_size:]  # Делаем срез массива с данными, удаляя обработанные
                 result.append(
                     (
                         frame_id,
@@ -54,6 +51,7 @@ def parse_id3v2(filename: str = "") -> list:
                 )  # Добавляем кортеж в список
     except (IOError, NotMP3Error, VersionError) as e:
         print(f"{e.__class__.__name__}: {e}")
+        return []
     return result
 
 
