@@ -6,7 +6,7 @@ class VersionError(Exception):
     pass
 
 
-def parse_id3v2(filename) -> list:
+def parse_id3v2(filename: str = "") -> list:
     encodings = {
         0: 'ISO-8859-1',
         1: 'UTF-16',
@@ -19,10 +19,10 @@ def parse_id3v2(filename) -> list:
             id3_data = file.read(10)
             file_id = id3_data[:3]  # Получаем идентификатор файла (ID3)
             if file_id != b'ID3':
-                raise NotMP3Error(f"File {filename} not MP3")  # Если файл не начинается с идентификатора ID3
+                raise NotMP3Error("File {} not MP3".format(filename))  # Если файл не начинается с идентификатора ID3
             id3_ver = id3_data[3]  # Версия ID3v2
             if id3_ver not in (3, 4):
-                raise VersionError(f"ID3V2 version of file {filename} not 3 or 4")  # Если версия не 3 и не 4
+                raise VersionError("ID3V2 version of file {} not 3 or 4".format(filename))  # Если версия не 3 и не 4
             id3_s_bytes = id3_data[6:10]  # Размер данных в байтовой записи
             # Переводим в int
             id3_size = (id3_s_bytes[0] << 21) + (id3_s_bytes[1] << 14) + (id3_s_bytes[2] << 7) + id3_s_bytes[3]
@@ -50,7 +50,7 @@ def parse_id3v2(filename) -> list:
                     )
                 )  # Добавляем кортеж в список
     except (IOError, NotMP3Error, VersionError) as e:
-        print(f"{e.__class__.__name__}: {e}")
+        print("{}: {}".format(e.__class__.__name__, e))
         return []
     return result
 
